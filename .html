@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CROWN TEE | Wear Your Royalty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --midnight-blue: #0d0f1b;
+      --charcoal: #1a1a1a;
+      --gold: #d4af37;
+      --white: #f0f0f0;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Montserrat', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--charcoal);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--midnight-blue);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .logo img {
+      width: 40px;
+    }
+
+    .logo h1 {
+      font-family: var(--font-heading);
+      color: var(--gold);
+      font-size: 1.8rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background-color: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      margin: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 80px;
+      right: 20px;
+      background: var(--midnight-blue);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .mobile-nav a {
+      padding: 1rem 2rem;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1612423284934-9336b5c720d4') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 2rem;
+      color: var(--white);
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+    }
+
+    .hero h2 {
+      font-family: var(--font-heading);
+      font-size: 4rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin-bottom: 2rem;
+    }
+
+    .hero a {
+      background: var(--gold);
+      color: var(--charcoal);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .hero a:hover {
+      background: #bfa033;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .gallery div {
+      text-align: center;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transition: transform 0.4s, filter 0.4s;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+
+    .gallery p {
+      margin-top: 0.5rem;
+      font-weight: 600;
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    .about, .testimonials, .contact {
+      background: var(--midnight-blue);
+      border-radius: 14px;
+      padding: 3rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      margin-bottom: 4rem;
+    }
+
+    h2 {
+      font-family: var(--font-heading);
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonials blockquote {
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--gold);
+      padding-left: 1rem;
+      font-style: italic;
+      color: #ccc;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    input, textarea {
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #2a2a2a;
+      color: var(--white);
+    }
+
+    button {
+      background: var(--gold);
+      color: var(--charcoal);
+      padding: 1rem;
+      border: none;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: #bfa033;
+    }
+
+    footer {
+      background: var(--midnight-blue);
+      color: var(--white);
+      text-align: center;
+      padding: 2rem;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      .burger {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Crown Logo" />
+      <h1>CROWN TEE</h1>
+    </div>
+    <nav id="desktop-nav">
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="burger" onclick="toggleMobileNav()">
+      <div></div><div></div><div></div>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <h2 data-aos="fade-down">Wear Your Royalty</h2>
+    <p data-aos="fade-up">Premium streetwear that redefines confidence. Crafted for the bold, worn by the elite. Step into your crown.</p>
+    <a href="#products" data-aos="zoom-in">Explore Collection</a>
+  </section>
+
+  <section class="gallery" id="products">
+    <div data-aos="zoom-in">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRShHMjPiEaahk4wBAm2ZR4_vIvmWznkzUged54KJ3VOHYTYSznYmOz4aV2&s=10" alt="Black Royal T-Shirt" />
+      <p>Rs 1499 – Free Delivery</p>
+    </div>
+    <div data-aos="zoom-in">
+      <img src="https://m.media-amazon.com/images/I/61Gx+6oEmpL._AC_SL1500_.jpg" alt="Green Crown T-Shirt" />
+      <p>Rs 1499 – Free Delivery</p>
+    </div>
+    <div data-aos="zoom-in">
+      <img src="https://s.alicdn.com/@sc04/kf/H1260907695fd40e394e062af7fadd2c6x.jpg_720x720q50.jpg" alt="Beige Elegance T-Shirt" />
+      <p>Rs 1499 – Free Delivery</p>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <h2 data-aos="fade-right">Our Story</h2>
+    <p data-aos="fade-left">CROWN TEE was born from a vision — to fuse the raw energy of urban streetwear with the elegance of royal fashion. Our garments are more than clothing; they are a statement of identity, pride, and elevation.</p>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <h2 data-aos="fade-right">Voices of the Crown</h2>
+    <blockquote data-aos="fade-up">"Wearing CROWN TEE makes me feel unstoppable. It's style and power combined." – Areeba M.</blockquote>
+    <blockquote data-aos="fade-up">"Hands down the most premium streetwear I’ve owned. It’s not just hype — it’s real." – Taha R.</blockquote>
+    <blockquote data-aos="fade-up">"CROWN TEE has become my daily armor. The attention to detail is elite." – Kiran J.</blockquote>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2 data-aos="fade-up">Get in Touch</h2>
+    <form data-aos="fade-up" onsubmit="return handleFormSubmit(event)">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+<footer>
+  &copy; 2025 CROWN TEE. All rights reserved. | Wear Your Royalty<br />
+  DM to order: <strong>03557177277</strong><br /><br />
+  <a href="https://wa.me/923557177277?text=Hello%20CROWN%20TEE%2C%20I%20would%20like%20to%20order%20a%20t-shirt." 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     aria-label="Chat on WhatsApp"
+     style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gold); text-decoration: none; font-weight: 600;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+         alt="WhatsApp Icon" 
+         style="width: 24px; height: 24px;" />
+    Chat on WhatsApp
+  </a>
+</footer>
+
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    function toggleMobileNav() {
+      const nav = document.getElementById("mobile-nav");
+      nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert("Thank you for contacting us! We'll get back to you shortly.");
+      e.target.reset();
+      return false;
+    }
+  </script>
+</body>
+</html>
